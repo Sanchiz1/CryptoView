@@ -1,5 +1,11 @@
-﻿namespace CryptoView.App.ViewModel;
+﻿using CryptoView.App.Utils;
 
-class ExchangesViewModel
+namespace CryptoView.App.ViewModel;
+
+class ExchangesViewModel : ViewModelBase
 {
+    public ExchangesViewModel()
+    {
+        OnPropertyChanged();
+    }
 }

@@ -4,13 +4,24 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:CryptoView.App.ViewModel"
+        xmlns:v="clr-namespace:CryptoView.App.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" WindowState="Maximized">
 
 
     <Window.DataContext>
         <vm:NavigationViewModel />
     </Window.DataContext>
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:CurrencyListViewModel}">
+            <v:CurrencyList/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ExchangesViewModel}">
+            <v:Exchanges/>
+        </DataTemplate>
+    </Window.Resources>
+    
     <Grid>
         <Grid>
 
@@ -46,7 +57,6 @@
 
                 <ContentControl x:Name="Pages"
                         Content="{Binding CurrentView}" />
-
             </Grid>
 
         </Grid>

@@ -25,6 +25,7 @@
             </Setter>
             <Setter Property="Background" Value="#121212" />
             <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Focusable" Value="False" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#333" />
@@ -51,6 +52,7 @@
             </Setter>
             <Setter Property="Background" Value="#fff" />
             <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Focusable" Value="False" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#f6f5f4" />

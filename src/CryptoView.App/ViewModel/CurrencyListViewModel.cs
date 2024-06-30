@@ -1,5 +1,11 @@
-﻿namespace CryptoView.App.ViewModel;
+﻿using CryptoView.App.Utils;
 
-class CurrencyListViewModel
+namespace CryptoView.App.ViewModel;
+
+class CurrencyListViewModel : ViewModelBase
 {
+    public CurrencyListViewModel()
+    {
+        OnPropertyChanged();
+    }
 }
