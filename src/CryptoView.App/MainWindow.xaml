@@ -3,10 +3,52 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CryptoView.App"
+        xmlns:vm="clr-namespace:CryptoView.App.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
 
+
+    <Window.DataContext>
+        <vm:NavigationViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid>
+
+            <!--// Base Grid //-->
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="228" />
+                <ColumnDefinition Width="622" />
+            </Grid.ColumnDefinitions>
+
+            <!--// Navigation Panel //-->
+
+            <Grid HorizontalAlignment="Left"
+          Width="228">
+
+                <Border />
+
+                <StackPanel
+                    Width="228">
+                    <Button Command="{Binding CurrencyListCommand}"
+                            Style="{DynamicResource BtnNavigation}"
+                            Content="Currencies" />
+
+                    <Button Command="{Binding ExchangesCommand}"
+                            Style="{DynamicResource BtnNavigation}"
+                            Content="Exchanges" />
+
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Column="1">
+
+                <ContentControl x:Name="Pages"
+                        Content="{Binding CurrentView}" />
+
+            </Grid>
+
+        </Grid>
     </Grid>
 </Window>
