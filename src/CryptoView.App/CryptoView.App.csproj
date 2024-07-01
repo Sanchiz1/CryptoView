@@ -8,4 +8,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CryptoView.CoinCapApi\CryptoView.CoinCapApi.csproj" />
+  </ItemGroup>
+
 </Project>

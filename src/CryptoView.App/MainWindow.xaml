@@ -15,10 +15,10 @@
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:CurrencyListViewModel}">
-            <v:CurrencyList/>
+            <v:CurrencyListView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:ExchangesViewModel}">
-            <v:Exchanges/>
+            <v:ExchangesView/>
         </DataTemplate>
     </Window.Resources>
     

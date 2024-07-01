@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace CryptoView.App.View
 {
     /// <summary>
-    /// Interaction logic for CurrencyList.xaml
+    /// Interaction logic for ExchangesView.xaml
     /// </summary>
-    public partial class CurrencyList : UserControl
+    public partial class ExchangesView : UserControl
     {
-        public CurrencyList()
+        public ExchangesView()
         {
             InitializeComponent();
         }
