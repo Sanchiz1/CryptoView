@@ -21,31 +21,45 @@
             <v:ExchangesView/>
         </DataTemplate>
     </Window.Resources>
-    
+
     <Grid>
-        <Grid>
-
-
+        
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="228" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Grid>
-
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBlock HorizontalAlignment="Left"
+      FontSize="30"
+      FontWeight="SemiBold"
+      Padding="5">CryptoView</TextBlock>
+            </Grid>
+            <Grid Grid.Row="1">
                 <Border />
 
                 <StackPanel
                     Width="228">
                     <Button Command="{Binding CurrencyListCommand}"
                             Style="{DynamicResource BtnNavigation}"
-                            Content="Currencies" />
+                            HorizontalContentAlignment="Left">
+                        <TextBlock HorizontalAlignment="Stretch">Currencies</TextBlock>
+                    </Button>
 
                     <Button Command="{Binding ExchangesCommand}"
                             Style="{DynamicResource BtnNavigation}"
-                            Content="Exchanges" />
+                            HorizontalContentAlignment="Left">
+                        <TextBlock HorizontalAlignment="Stretch">Exchanges</TextBlock>
+                    </Button>
+
 
                 </StackPanel>
+            </Grid>
 
             </Grid>
 
@@ -56,5 +70,4 @@
                     HorizontalContentAlignment="Stretch"/>
             </Grid>
         </Grid>
-    </Grid>
 </Window>

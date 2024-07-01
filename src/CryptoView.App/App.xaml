@@ -23,6 +23,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Foreground" Value="#fff" />
             <Setter Property="Background" Value="#121212" />
             <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="Focusable" Value="False" />
@@ -53,6 +54,7 @@
             <Setter Property="Background" Value="#fff" />
             <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="Focusable" Value="False" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#f6f5f4" />

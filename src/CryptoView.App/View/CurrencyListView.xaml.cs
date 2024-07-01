@@ -25,19 +25,5 @@ namespace CryptoView.App.View
         {
             InitializeComponent();
         }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                AssetsService service = new AssetsService();
-
-                var res = await service.GetAssetsAsync();
-                MessageBox.Show(res.ToString());
-            }
-            catch (Exception ex) {
-                MessageBox.Show(ex.Message);
-            }
-        }
     }
 }

@@ -24,29 +24,74 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Header Row -->
             <RowDefinition Height="*"/>
-            <!-- Content Row with ScrollViewer -->
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <TextBlock HorizontalAlignment="Left" 
+        
+        
+        <Grid Grid.Row="0" >
+            <StackPanel>
+            
+            <TextBlock 
+              HorizontalAlignment="Left" 
               FontSize="24"
               FontWeight="SemiBold"
               Padding="5">
                 Currencies
             </TextBlock>
+
+                <WrapPanel
+          Margin="0 20 0 30"
+          HorizontalAlignment="Center"
+        >
+
+                    <Button 
+                Style="{DynamicResource BtnPrimary}"
+                HorizontalAlignment="Left"  Command="{Binding PreviousCommand}">
+                        <WrapPanel VerticalAlignment="Center">
+                            <TextBlock 
+                VerticalAlignment="Center"  FontSize="16"
+              >
+                ←
+                            </TextBlock>
+                            <TextBlock 
+                VerticalAlignment="Center" FontWeight="Medium" FontSize="13" Margin="6 0 0 0"
+              >
+                Previous
+                            </TextBlock>
+                        </WrapPanel>
+                    </Button>
+                    <Button 
+                Style="{DynamicResource BtnPrimary}"
+                HorizontalAlignment="Left" 
+                Width="100" Command="{Binding NextCommand}">
+                        <WrapPanel VerticalAlignment="Center">
+                            <TextBlock 
+                        VerticalAlignment="Center" 
+                        FontWeight="Medium" 
+                        FontSize="13"
+                      >
+                        Next
+                            </TextBlock>
+                            <TextBlock 
+                        VerticalAlignment="Center"
+                        FontSize="16" 
+                        Margin="6 3 0 3"
+                      >
+                        →
+                            </TextBlock>
+                        </WrapPanel>
+                    </Button>
+                </WrapPanel>
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
             <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <!-- Header Row -->
                         <RowDefinition Height="*"/>
-                        <!-- Content Row with ScrollViewer -->
                     </Grid.RowDefinitions>
-                    <!-- Header Row -->
-            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20 0 20 0">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20 0 20 0">
                 <TextBlock Width="44" Text="#" HorizontalAlignment="Left"
                           FontWeight="SemiBold"/>
                     <TextBlock Width="150" Text="Name" HorizontalAlignment="Left"

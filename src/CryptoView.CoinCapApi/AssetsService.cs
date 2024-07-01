@@ -18,10 +18,14 @@ public class AssetsService
         _client = new ApiClient(new HttpClient());
         _uriBuilder = new CoinCapUriBuilder();
     }
-    public async Task<IEnumerable<Asset>> GetAssetsAsync()
+    public async Task<IEnumerable<Asset>> GetAssetsAsync(int limit, int offset)
     {
         var res = await _client.GetAsync<DataType<IEnumerable<Asset>>>(
-                _uriBuilder.Assets().Build())
+                _uriBuilder.Assets().WithQueryParams(new Dictionary<string, object>()
+                {
+                    {"limit", limit },
+                    {"offset", offset }
+                }).Build())
                 .ConfigureAwait(false);
         return res.Data;
     }

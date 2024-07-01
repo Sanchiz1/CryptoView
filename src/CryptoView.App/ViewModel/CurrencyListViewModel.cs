@@ -8,8 +8,34 @@ namespace CryptoView.App.ViewModel;
 class CurrencyListViewModel : ViewModelBase
 {
     private readonly AssetsService assetsService = new AssetsService();
+
     private IEnumerable<Asset> _assets = new List<Asset>();
 
+    private string _searchQuery;
+
+    public string SearchQuery
+    {
+        get => _searchQuery;
+        set
+        {
+            _searchQuery = value;
+            OnPropertyChanged(nameof(SearchQuery));
+        }
+    }
+
+    private int _skip = 0;
+
+    public int Skip
+    {
+        get => _skip;
+        set
+        {
+            _skip = value;
+            OnPropertyChanged(nameof(Skip));
+        }
+    }
+
+    private const int Take = 10;
     public IEnumerable<Asset> Assets
     {
         get => _assets;
@@ -21,16 +47,38 @@ class CurrencyListViewModel : ViewModelBase
     }
 
     public ICommand GetAssetsCommand { get; }
+    public ICommand NextCommand { get; }
+    public ICommand PreviousCommand { get; }
 
     public CurrencyListViewModel()
     {
         OnPropertyChanged();
         GetAssetsCommand = new AsyncCommand(FetchAssets);
+        NextCommand = new RelayCommand(_ => NextPage());
+        PreviousCommand = new RelayCommand(_ => PreviousPage());
+        _ = FetchAssets();
+    }
+    private void NextPage()
+    {
+        Skip+=Take;
+        _ = FetchAssets();
+    }
+
+    private void PreviousPage()
+    {
+        if (Skip <= Take)
+        {
+            Skip = 0;
+        }
+        else
+        {
+            Skip -= Take;
+        }
         _ = FetchAssets();
     }
 
     public async Task FetchAssets()
     {
-        Assets = await assetsService.GetAssetsAsync();
+        Assets = await assetsService.GetAssetsAsync(Take, Skip);
     }
 }
