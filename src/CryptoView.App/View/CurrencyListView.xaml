@@ -4,9 +4,97 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CryptoView.App.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:vm="clr-namespace:CryptoView.App.ViewModel"
+             xmlns:c="clr-namespace:CryptoView.App.Converters"
+             mc:Ignorable="d"
+             HorizontalAlignment="Stretch">
+
+    <UserControl.DataContext>
+        <vm:CurrencyListViewModel />
+    </UserControl.DataContext>
+
+
+    <UserControl.Resources>
+        <c:StringToPrice x:Key="StringToPrice" />
+        <c:StringToPercent x:Key="StringToPercent" />
+        <c:PercentToBrush x:Key="PercentToBrush" />
+        <c:PercentToArrow x:Key="PercentToArrow" />
+    </UserControl.Resources>
+
     <Grid>
-        <Button Click="Button_Click"></Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Header Row -->
+            <RowDefinition Height="*"/>
+            <!-- Content Row with ScrollViewer -->
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBlock HorizontalAlignment="Left" 
+              FontSize="24"
+              FontWeight="SemiBold"
+              Padding="5">
+                Currencies
+            </TextBlock>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <!-- Header Row -->
+                        <RowDefinition Height="*"/>
+                        <!-- Content Row with ScrollViewer -->
+                    </Grid.RowDefinitions>
+                    <!-- Header Row -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20 0 20 0">
+                <TextBlock Width="44" Text="#" HorizontalAlignment="Left"
+                          FontWeight="SemiBold"/>
+                    <TextBlock Width="150" Text="Name" HorizontalAlignment="Left"
+                          FontWeight="SemiBold"/>
+                <TextBlock Width="200" Text="Supply" HorizontalAlignment="Left"
+                          FontWeight="SemiBold"/>
+                    <TextBlock Width="200" Text="Max supply" HorizontalAlignment="Left"
+                          FontWeight="SemiBold"/>
+                    <TextBlock Width="200" Text="Price" HorizontalAlignment="Left"
+                          FontWeight="SemiBold"/>
+                <TextBlock Width="200" Text="Change percent" HorizontalAlignment="Left"
+                          FontWeight="SemiBold"/>
+                <TextBlock Width="200" Text="VWAP" HorizontalAlignment="Left"
+                          FontWeight="SemiBold"/>
+            </StackPanel>
+
+            <!-- Content Row with ScrollViewer -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl ItemsSource="{Binding Assets}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Background="Transparent" Height="75" Margin="20 0">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Rank}" Width="44" HorizontalAlignment="Left" VerticalAlignment="Center"
+                          FontWeight="SemiBold"/>
+                                    <TextBlock Text="{Binding Name}" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center"
+                          FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding Supply, Converter={StaticResource StringToPrice}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+                          FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding MaxSupply, Converter={StaticResource StringToPrice}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+                          FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding PriceUsd, Converter={StaticResource StringToPrice}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+                          FontWeight="SemiBold"/>
+                                        <TextBlock Foreground="{Binding ChangePercent24Hr, Converter={StaticResource PercentToBrush}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+                          FontWeight="SemiBold">
+                                            <Run  Text="{Binding ChangePercent24Hr, Converter={StaticResource PercentToArrow}}"></Run>
+                                            <Run  Text="{Binding ChangePercent24Hr, Converter={StaticResource StringToPercent}}"></Run>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding Vwap24Hr, Converter={StaticResource StringToPrice}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+                          FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            </Grid>
+        </ScrollViewer>
+        </Grid>
     </Grid>
 </UserControl>

@@ -15,10 +15,10 @@ public class Asset
     public string? Rank { get; set; }
 
     [JsonPropertyName("symbol")]
-    public string Symbol { get; set; }
+    public string? Symbol { get; set; }
 
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     [JsonPropertyName("supply")]
     public string? Supply { get; set; }
@@ -27,7 +27,7 @@ public class Asset
     public string? MaxSupply { get; set; }
 
     [JsonPropertyName("marketCapUsd")]
-    public string? marketCapUsd { get; set; }
+    public string? MarketCapUsd { get; set; }
 
     [JsonPropertyName("volumeUsd24Hr")]
     public string? VolumeUsd24Hr { get; set; }

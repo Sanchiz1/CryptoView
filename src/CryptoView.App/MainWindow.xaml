@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:CryptoView.App.ViewModel"
         xmlns:v="clr-namespace:CryptoView.App.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" WindowState="Maximized">
+        Title="MainWindow" WindowState="Maximized">
 
 
     <Window.DataContext>
@@ -25,17 +25,13 @@
     <Grid>
         <Grid>
 
-            <!--// Base Grid //-->
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="228" />
-                <ColumnDefinition Width="622" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!--// Navigation Panel //-->
-
-            <Grid HorizontalAlignment="Left"
-          Width="228">
+            <Grid>
 
                 <Border />
 
@@ -54,11 +50,11 @@
             </Grid>
 
             <Grid Grid.Column="1">
-
                 <ContentControl x:Name="Pages"
-                        Content="{Binding CurrentView}" />
+                        Content="{Binding CurrentView}"
+                    VerticalContentAlignment="Stretch" 
+                    HorizontalContentAlignment="Stretch"/>
             </Grid>
-
         </Grid>
     </Grid>
 </Window>
