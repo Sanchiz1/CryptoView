@@ -3,10 +3,211 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CryptoView.App.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:vm="clr-namespace:CryptoView.App.ViewModel"
+             xmlns:c="clr-namespace:CryptoView.App.Converters"
+             mc:Ignorable="d">
+
+    <UserControl.DataContext>
+        <vm:ExchangesViewModel />
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <c:StringToPrice x:Key="StringToPrice" />
+        <c:StringToPercent x:Key="StringToPercent" />
+        <c:PercentToBrush x:Key="PercentToBrush" />
+        <c:PercentToArrow x:Key="PercentToArrow" />
+        <c:DecimalToRate x:Key="DecimalToRate" />
+    </UserControl.Resources>
     <Grid>
-            
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
+                <Grid Grid.Row="0" >
+                    <StackPanel>
+                        <TextBlock 
+                  HorizontalAlignment="Left" 
+                  FontSize="24"
+                  FontWeight="SemiBold"
+                  Padding="5">
+                Currencies exchange
+                        </TextBlock>
+                        <StackPanel>
+                            <TextBlock 
+                  HorizontalAlignment="Left" 
+                  FontSize="20"
+                  FontWeight="SemiBold"
+                  Padding="5">
+                Currency 1
+                            </TextBlock>
+                            <WrapPanel
+                Margin="0 10 0 30"
+                HorizontalAlignment="Left">
+                                <TextBox Width="300" Style="{StaticResource TextBoxPrimary}"
+                     VerticalContentAlignment="Center"
+                     TextWrapping="NoWrap"
+                     AcceptsReturn="False"
+                     VerticalScrollBarVisibility="Disabled"
+                     FontSize="16"
+                     FontWeight="Medium"
+                     Margin="0 0 5 0"
+                      Text="{Binding SearchQuery1, UpdateSourceTrigger=PropertyChanged}"
+                     >
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Command="{Binding SearchAsset1Command}" Key="Return" />
+                                    </TextBox.InputBindings>
+                                </TextBox>
+                                <Button Style="{DynamicResource BtnPrimary}"
+                    HorizontalAlignment="Left"  
+                    Command="{Binding SearchAsset1Command}"
+                     Margin="0 0 10 0">
+                                    <WrapPanel VerticalAlignment="Center">
+                                        <TextBlock 
+                        VerticalAlignment="Center" FontWeight="Medium" FontSize="13" Margin="6 0 0 0">
+                        Search
+                                        </TextBlock>
+                                    </WrapPanel>
+                                </Button>
+                            </WrapPanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20 0 20 0">
+                                    <TextBlock Width="44" Text="#" HorizontalAlignment="Left"
+                  FontWeight="SemiBold"/>
+                                    <TextBlock Width="150" Text="Name" HorizontalAlignment="Left"
+                  FontWeight="SemiBold"/>
+                                    <TextBlock Width="200" Text="Supply" HorizontalAlignment="Left"
+                  FontWeight="SemiBold"/>
+                                    <TextBlock Width="200" Text="Max supply" HorizontalAlignment="Left"
+                  FontWeight="SemiBold"/>
+                                    <TextBlock Width="200" Text="Price" HorizontalAlignment="Left"
+                  FontWeight="SemiBold"/>
+                                    <TextBlock Width="200" Text="Change percent" HorizontalAlignment="Left"
+                  FontWeight="SemiBold"/>
+                                    <TextBlock Width="200" Text="VWAP(24h)" HorizontalAlignment="Left"
+                  FontWeight="SemiBold"/>
+                                </StackPanel>
+                                <Grid Background="Transparent" Height="75" Margin="20 0">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Asset1.Rank}" Width="44" HorizontalAlignment="Left" VerticalAlignment="Center"
+                  FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding Asset1.Name}" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding Asset1.Supply, Converter={StaticResource StringToPrice}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+                  FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding Asset1.MaxSupply, Converter={StaticResource StringToPrice}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+                  FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding Asset1.PriceUsd, Converter={StaticResource StringToPrice}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+                  FontWeight="SemiBold"/>
+                                        <TextBlock Foreground="{Binding Asset1.ChangePercent24Hr, Converter={StaticResource PercentToBrush}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+                  FontWeight="SemiBold">
+                                    <Run  Text="{Binding Asset1.ChangePercent24Hr, Converter={StaticResource PercentToArrow}}"></Run>
+                                    <Run  Text="{Binding Asset1.ChangePercent24Hr, Converter={StaticResource StringToPercent}}"></Run>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding Asset1.Vwap24Hr, Converter={StaticResource StringToPrice}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+                  FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock 
+  HorizontalAlignment="Left" 
+  FontSize="20"
+  FontWeight="SemiBold"
+  Padding="5">
+Currency 2
+                            </TextBlock>
+                            <WrapPanel
+Margin="0 10 0 30"
+HorizontalAlignment="Left">
+                                <TextBox Width="300" Style="{StaticResource TextBoxPrimary}"
+     VerticalContentAlignment="Center"
+     TextWrapping="NoWrap"
+     AcceptsReturn="False"
+     VerticalScrollBarVisibility="Disabled"
+     FontSize="16"
+     FontWeight="Medium"
+     Margin="0 0 5 0"
+      Text="{Binding SearchQuery2, UpdateSourceTrigger=PropertyChanged}"
+     >
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Command="{Binding SearchAsset2Command}" Key="Return" />
+                                    </TextBox.InputBindings>
+                                </TextBox>
+                                <Button Style="{DynamicResource BtnPrimary}"
+    HorizontalAlignment="Left"  
+    Command="{Binding SearchAsset2Command}"
+     Margin="0 0 10 0">
+                                    <WrapPanel VerticalAlignment="Center">
+                                        <TextBlock 
+        VerticalAlignment="Center" FontWeight="Medium" FontSize="13" Margin="6 0 0 0">
+        Search
+                                        </TextBlock>
+                                    </WrapPanel>
+                                </Button>
+                            </WrapPanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20 0 20 0">
+                                    <TextBlock Width="44" Text="#" HorizontalAlignment="Left"
+  FontWeight="SemiBold"/>
+                                    <TextBlock Width="150" Text="Name" HorizontalAlignment="Left"
+  FontWeight="SemiBold"/>
+                                    <TextBlock Width="200" Text="Supply" HorizontalAlignment="Left"
+  FontWeight="SemiBold"/>
+                                    <TextBlock Width="200" Text="Max supply" HorizontalAlignment="Left"
+  FontWeight="SemiBold"/>
+                                    <TextBlock Width="200" Text="Price" HorizontalAlignment="Left"
+  FontWeight="SemiBold"/>
+                                    <TextBlock Width="200" Text="Change percent" HorizontalAlignment="Left"
+  FontWeight="SemiBold"/>
+                                    <TextBlock Width="200" Text="VWAP(24h)" HorizontalAlignment="Left"
+  FontWeight="SemiBold"/>
+                                </StackPanel>
+                                <Grid Background="Transparent" Height="75" Margin="20 0">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Asset2.Rank}" Width="44" HorizontalAlignment="Left" VerticalAlignment="Center"
+  FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding Asset2.Name}" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding Asset2.Supply, Converter={StaticResource StringToPrice}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+  FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding Asset2.MaxSupply, Converter={StaticResource StringToPrice}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+  FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding Asset2.PriceUsd, Converter={StaticResource StringToPrice}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+  FontWeight="SemiBold"/>
+                                        <TextBlock Foreground="{Binding Asset2.ChangePercent24Hr, Converter={StaticResource PercentToBrush}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+  FontWeight="SemiBold">
+                    <Run  Text="{Binding Asset2.ChangePercent24Hr, Converter={StaticResource PercentToArrow}}"></Run>
+                    <Run  Text="{Binding Asset2.ChangePercent24Hr, Converter={StaticResource StringToPercent}}"></Run>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding Asset2.Vwap24Hr, Converter={StaticResource StringToPrice}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+  FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </StackPanel>
+                        <TextBlock 
+                          HorizontalAlignment="Left" 
+                          FontSize="20"
+                          FontWeight="SemiBold"
+                          Padding="5">          
+                            <Run>Exchange rate: </Run>
+                            <Run Text="{Binding ExchangeRate, Converter={StaticResource DecimalToRate}}"></Run>
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

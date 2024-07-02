@@ -35,10 +35,17 @@ public class CoinCapService
 
     public async Task<Asset> GetAssetAsync(string assetId)
     {
-        var res = await _client.GetAsync<DataType<Asset>>(
-                _uriBuilder.Assets().WithParam(assetId).Build())
-                .ConfigureAwait(false);
-        return res.Data;
+        try
+        {
+            var res = await _client.GetAsync<DataType<Asset>>(
+                    _uriBuilder.Assets().WithParam(assetId).Build())
+                    .ConfigureAwait(false);
+            return res.Data;
+        }
+        catch (HttpRequestException)
+        {
+            return null;
+        }
     }
 
     public async Task<IEnumerable<Market>> GetAssetMarketsAsync(string assetId, int limit, int offset)
