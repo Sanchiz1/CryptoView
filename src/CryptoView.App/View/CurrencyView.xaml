@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="CryptoView.App.View.CurrencyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CryptoView.App.View"
+             xmlns:vm="clr-namespace:CryptoView.App.ViewModel"
+             xmlns:c="clr-namespace:CryptoView.App.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <c:StringToPrice x:Key="StringToPrice" />
+        <c:StringToPercent x:Key="StringToPercent" />
+        <c:PercentToBrush x:Key="PercentToBrush" />
+        <c:PercentToArrow x:Key="PercentToArrow" />
+    </UserControl.Resources>
+    <Grid>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid Margin="5 0 0 0">
+
+                <StackPanel>
+
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" 
+                              FontSize="24"
+                              FontWeight="SemiBold"
+                               Text="{Binding Asset.Name}">
+                    </TextBlock>
+                    <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Margin="0 0 5 0">
+                            <WrapPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                <TextBlock Margin="0 0 0 5" Text="Rank" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   FontWeight="SemiBold"/>
+                                <TextBlock Margin="0 0 0 5" Text="Price" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   FontWeight="SemiBold"/>
+                                <TextBlock Margin="0 0 0 5" Text="Supply" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   FontWeight="SemiBold"/>
+                                <TextBlock Margin="0 0 0 5" Text="Max supply" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   FontWeight="SemiBold"/>
+                                <TextBlock Margin="0 0 0 5" Text="Market cap" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   FontWeight="SemiBold"/>
+                                <TextBlock Margin="0 0 0 5" Text="Volume(24h)" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   FontWeight="SemiBold"/>
+                                <TextBlock Margin="0 0 0 5" Text="VWAP(24h)" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   FontWeight="SemiBold"/>
+                                <TextBlock Margin="0 0 0 5" Text="Change percent(24h)" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   FontWeight="SemiBold"/>
+                            </WrapPanel>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <WrapPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <TextBlock Margin="0 0 0 5" Text="{Binding Asset.Rank}" HorizontalAlignment="Left" VerticalAlignment="Center"
+FontWeight="SemiBold"/>
+                                <TextBlock Margin="0 0 0 5" Text="{Binding Asset.PriceUsd, Converter={StaticResource StringToPrice}}" HorizontalAlignment="Left" VerticalAlignment="Center"
+FontWeight="SemiBold"/>
+                                <TextBlock Margin="0 0 0 5" Text="{Binding Asset.Supply, Converter={StaticResource StringToPrice}}" HorizontalAlignment="Left" VerticalAlignment="Center"
+FontWeight="SemiBold"/>
+                                <TextBlock Margin="0 0 0 5" Text="{Binding Asset.MaxSupply, Converter={StaticResource StringToPrice}}" HorizontalAlignment="Left" VerticalAlignment="Center"
+FontWeight="SemiBold"/>
+                                <TextBlock Margin="0 0 0 5" Text="{Binding Asset.MarketCapUsd, Converter={StaticResource StringToPrice}}" HorizontalAlignment="Left" VerticalAlignment="Center"
+FontWeight="SemiBold"/>
+                                <TextBlock Margin="0 0 0 5" Text="{Binding Asset.VolumeUsd24Hr, Converter={StaticResource StringToPrice}}" HorizontalAlignment="Left" VerticalAlignment="Center"
+FontWeight="SemiBold"/>
+                                <TextBlock Margin="0 0 0 5" Text="{Binding Asset.Vwap24Hr, Converter={StaticResource StringToPrice}}" HorizontalAlignment="Left" VerticalAlignment="Center"
+FontWeight="SemiBold"/>
+                                <TextBlock Margin="0 0 0 5" Foreground="{Binding Asset.ChangePercent24Hr, Converter={StaticResource PercentToBrush}}" HorizontalAlignment="Left" VerticalAlignment="Center"
+FontWeight="SemiBold">
+                  <Run  Text="{Binding Asset.ChangePercent24Hr, Converter={StaticResource PercentToArrow}}"></Run>
+                  <Run  Text="{Binding Asset.ChangePercent24Hr, Converter={StaticResource StringToPercent}}"></Run>
+                                </TextBlock>
+                            </WrapPanel>
+                        </Grid>
+                        <Grid Grid.Column="2">
+                            <Button Style="{StaticResource BtnPrimary}" Command="{Binding VisitCommand}" HorizontalAlignment="Left" VerticalAlignment="Top">Visit</Button>
+                        </Grid>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

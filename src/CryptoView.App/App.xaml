@@ -1,8 +1,21 @@
 ﻿<Application x:Class="CryptoView.App.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:vm="clr-namespace:CryptoView.App.ViewModel"
+            xmlns:v="clr-namespace:CryptoView.App.View"
+            xmlns:local="clr-namespace:CryptoView.App"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <DataTemplate DataType="{x:Type vm:CurrencyViewModel}">
+            <v:CurrencyView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CurrencyListViewModel}">
+            <v:CurrencyListView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ExchangesViewModel}">
+            <v:ExchangesView/>
+        </DataTemplate>
+        
         <Style TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="Segoe UI"/>

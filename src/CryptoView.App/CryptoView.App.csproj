@@ -9,7 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="icons8-coin-100.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CryptoView.CoinCapApi\CryptoView.CoinCapApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icons8-coin-100.png" />
   </ItemGroup>
 
 </Project>

@@ -130,7 +130,7 @@
                           FontWeight="SemiBold"/>
                 <TextBlock Width="200" Text="Change percent" HorizontalAlignment="Left"
                           FontWeight="SemiBold"/>
-                <TextBlock Width="200" Text="VWAP" HorizontalAlignment="Left"
+                        <TextBlock Width="200" Text="VWAP(24h)" HorizontalAlignment="Left"
                           FontWeight="SemiBold"/>
             </StackPanel>
 
@@ -144,7 +144,7 @@
                                     <TextBlock Text="{Binding Rank}" Width="44" HorizontalAlignment="Left" VerticalAlignment="Center"
                           FontWeight="SemiBold"/>
                                             <TextBlock Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold">
-                                                <Hyperlink Style="{StaticResource HyperlinkPrimary}" Command="{Binding DataContext.RowClickCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}">
+                                                <Hyperlink Style="{StaticResource HyperlinkPrimary}" Command="{Binding DataContext.OpenCurrencyCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding Id}">
                                                     <TextBlock Text="{Binding Name}" />
                                                 </Hyperlink>
                                             </TextBlock>

@@ -1,6 +1,7 @@
 ﻿using CryptoView.App.Utils;
 using CryptoView.CoinCapApi;
 using CryptoView.CoinCapApi.Entities;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CryptoView.App.ViewModel;
@@ -8,6 +9,7 @@ namespace CryptoView.App.ViewModel;
 class CurrencyListViewModel : ViewModelBase
 {
     private readonly AssetsService assetsService = new AssetsService();
+    private readonly WindowService windowService = new WindowService();
 
     private IEnumerable<Asset> _assets = new List<Asset>();
 
@@ -50,14 +52,16 @@ class CurrencyListViewModel : ViewModelBase
     public ICommand NextCommand { get; }
     public ICommand PreviousCommand { get; }
     public ICommand SearchCommand { get; }
+    public ICommand OpenCurrencyCommand { get; }
 
     public CurrencyListViewModel()
     {
         OnPropertyChanged();
         GetAssetsCommand = new AsyncCommand(FetchAssets);
-        NextCommand = new RelayCommand(_ => NextPage());
-        PreviousCommand = new RelayCommand(_ => PreviousPage());
-        SearchCommand = new RelayCommand(_ => Search());
+        NextCommand = new RelayCommand<object>(_ => NextPage());
+        PreviousCommand = new RelayCommand<object>(_ => PreviousPage());
+        SearchCommand = new RelayCommand<object>(_ => Search());
+        OpenCurrencyCommand = new RelayCommand<string>(OpenCurrency);
         _ = FetchAssets();
     }
     private void NextPage()
@@ -83,6 +87,15 @@ class CurrencyListViewModel : ViewModelBase
     {
         Skip = 0;
         _ = FetchAssets();
+    }
+
+    private void OpenCurrency(string assetId)
+    {
+        var vm = new CurrencyViewModel();
+
+        vm.AssetId = assetId;
+
+        windowService.ShowWindow(vm);
     }
 
     public async Task FetchAssets()

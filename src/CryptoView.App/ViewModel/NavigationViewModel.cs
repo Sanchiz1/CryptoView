@@ -20,8 +20,8 @@ class NavigationViewModel : ViewModelBase
 
     public NavigationViewModel()
     {
-        CurrencyListCommand = new RelayCommand(CurrencyList);
-        ExchangesCommand = new RelayCommand(Exchanges);
+        CurrencyListCommand = new RelayCommand<object>(CurrencyList);
+        ExchangesCommand = new RelayCommand<object>(Exchanges);
         CurrentView = new CurrencyListViewModel();
     }
 }
