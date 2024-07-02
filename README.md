@@ -15,14 +15,17 @@ CryptoView is a WPF application designed to display cryptocurrency data. The app
    git clone https://github.com/your-username/cryptoview.git
 
 2. Navigate to the project directory:
+
    Change your current directory to the CryptoView project folder:
    ```sh
    cd cryptoview
-3. Restore the dependencies:
+4. Restore the dependencies:
+
    Run the following command to restore the project dependencies:
    ```sh
    dotnet restore
 3. Build the project:
+
    Use the following command to build the project:
    ```sh
    dotnet build
