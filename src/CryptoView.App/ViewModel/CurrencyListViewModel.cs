@@ -11,7 +11,7 @@ class CurrencyListViewModel : ViewModelBase
 
     private IEnumerable<Asset> _assets = new List<Asset>();
 
-    private string _searchQuery;
+    private string _searchQuery = "";
 
     public string SearchQuery
     {
@@ -49,6 +49,7 @@ class CurrencyListViewModel : ViewModelBase
     public ICommand GetAssetsCommand { get; }
     public ICommand NextCommand { get; }
     public ICommand PreviousCommand { get; }
+    public ICommand SearchCommand { get; }
 
     public CurrencyListViewModel()
     {
@@ -56,6 +57,7 @@ class CurrencyListViewModel : ViewModelBase
         GetAssetsCommand = new AsyncCommand(FetchAssets);
         NextCommand = new RelayCommand(_ => NextPage());
         PreviousCommand = new RelayCommand(_ => PreviousPage());
+        SearchCommand = new RelayCommand(_ => Search());
         _ = FetchAssets();
     }
     private void NextPage()
@@ -77,8 +79,14 @@ class CurrencyListViewModel : ViewModelBase
         _ = FetchAssets();
     }
 
+    private void Search()
+    {
+        Skip = 0;
+        _ = FetchAssets();
+    }
+
     public async Task FetchAssets()
     {
-        Assets = await assetsService.GetAssetsAsync(Take, Skip);
+        Assets = await assetsService.GetAssetsAsync(Take, Skip, SearchQuery);
     }
 }
