@@ -12,7 +12,7 @@ CryptoView is a WPF application designed to display cryptocurrency data. The app
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/cryptoview.git
+   git clone https://github.com/Sanchiz1/cryptoview.git
 
 2. Navigate to the project directory:
 
