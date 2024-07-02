@@ -8,7 +8,7 @@ namespace CryptoView.App.ViewModel;
 
 class CurrencyListViewModel : ViewModelBase
 {
-    private readonly AssetsService assetsService = new AssetsService();
+    private readonly CoinCapService assetsService = new CoinCapService();
     private readonly WindowService windowService = new WindowService();
 
     private IEnumerable<Asset> _assets = new List<Asset>();

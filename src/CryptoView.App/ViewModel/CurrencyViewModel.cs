@@ -14,10 +14,11 @@ namespace CryptoView.App.ViewModel;
 
 class CurrencyViewModel : ViewModelBase
 {
-    private readonly AssetsService assetsService = new AssetsService();
+    private readonly CoinCapService assetsService = new CoinCapService();
 
     private string _assetId = "";
     private Asset _asset;
+    private IEnumerable<Market> _markets;
 
     public string AssetId
     {
@@ -27,8 +28,10 @@ class CurrencyViewModel : ViewModelBase
             _assetId = value;
             OnPropertyChanged(nameof(AssetId));
             _ = FetchAsset();
+            _ = FetchMarkets();
         }
     }
+
     public Asset Asset
     {
         get => _asset;
@@ -36,6 +39,16 @@ class CurrencyViewModel : ViewModelBase
         {
             _asset = value;
             OnPropertyChanged(nameof(Asset));
+        }
+    }
+
+    public IEnumerable<Market> Markets
+    {
+        get => _markets;
+        set
+        {
+            _markets = value;
+            OnPropertyChanged(nameof(Markets));
         }
     }
 
@@ -60,5 +73,10 @@ class CurrencyViewModel : ViewModelBase
     public async Task FetchAsset()
     {
         Asset = await assetsService.GetAssetAsync(AssetId);
+    }
+
+    public async Task FetchMarkets()
+    {
+        Markets = await assetsService.GetAssetMarketsAsync(AssetId, 5, 0);
     }
 }

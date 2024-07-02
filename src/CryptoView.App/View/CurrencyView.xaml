@@ -28,12 +28,12 @@
                                Text="{Binding Asset.Name}">
                     </TextBlock>
                     <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="400"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Margin="0 0 5 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="400"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="0 0 5 0">
                             <WrapPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
                                 <TextBlock Margin="0 0 0 5" Text="Rank" HorizontalAlignment="Left" VerticalAlignment="Center"
                                    FontWeight="SemiBold"/>
@@ -52,10 +52,10 @@
                                 <TextBlock Margin="0 0 0 5" Text="Change percent(24h)" HorizontalAlignment="Left" VerticalAlignment="Center"
                                    FontWeight="SemiBold"/>
                             </WrapPanel>
-                </Grid>
-                <Grid Grid.Column="1">
-                    <WrapPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
-                        <TextBlock Margin="0 0 0 5" Text="{Binding Asset.Rank}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <WrapPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                <TextBlock Margin="0 0 0 5" Text="{Binding Asset.Rank}" HorizontalAlignment="Left" VerticalAlignment="Center"
 FontWeight="SemiBold"/>
                                 <TextBlock Margin="0 0 0 5" Text="{Binding Asset.PriceUsd, Converter={StaticResource StringToPrice}}" HorizontalAlignment="Left" VerticalAlignment="Center"
 FontWeight="SemiBold"/>
@@ -79,6 +79,48 @@ FontWeight="SemiBold">
                         <Grid Grid.Column="2">
                             <Button Style="{StaticResource BtnPrimary}" Command="{Binding VisitCommand}" HorizontalAlignment="Left" VerticalAlignment="Top">Visit</Button>
                         </Grid>
+                    </Grid>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" 
+                              FontSize="24"
+                              FontWeight="SemiBold"
+                               Text="Markets"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20 0 20 0">
+                            <TextBlock Width="200" Text="Name" HorizontalAlignment="Left"
+              FontWeight="SemiBold"/>
+                            <TextBlock Width="200" Text="Volume(24h)" HorizontalAlignment="Left"
+              FontWeight="SemiBold"/>
+                            <TextBlock Width="200" Text="Price" HorizontalAlignment="Left"
+              FontWeight="SemiBold"/>
+                            <TextBlock Width="200" Text="Volume percent" HorizontalAlignment="Left"
+              FontWeight="SemiBold"/>
+                        </StackPanel>
+
+                        <!-- Content Row with ScrollViewer -->
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                            <ItemsControl ItemsSource="{Binding Markets}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Background="Transparent" Height="75" Margin="20 0">
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding ExchangeId}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+              FontWeight="SemiBold"/>
+                                                <TextBlock Text="{Binding VolumeUsd24Hr, Converter={StaticResource StringToPrice}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+              FontWeight="SemiBold"/>
+                                                <TextBlock Text="{Binding PriceUsd, Converter={StaticResource StringToPrice}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+              FontWeight="SemiBold"/>
+                                                <TextBlock Text="{Binding VolumePercent, Converter={StaticResource StringToPercent}}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+              FontWeight="SemiBold"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
                     </Grid>
                 </StackPanel>
             </Grid>

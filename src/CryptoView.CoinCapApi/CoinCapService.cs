@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CryptoView.CoinCapApi;
-public class AssetsService
+public class CoinCapService
 {
     private readonly ApiClient _client;
     private readonly CoinCapUriBuilder _uriBuilder;
-    public AssetsService()
+    public CoinCapService()
     {
         _client = new ApiClient(new HttpClient());
         _uriBuilder = new CoinCapUriBuilder();
@@ -37,6 +37,18 @@ public class AssetsService
     {
         var res = await _client.GetAsync<DataType<Asset>>(
                 _uriBuilder.Assets().WithParam(assetId).Build())
+                .ConfigureAwait(false);
+        return res.Data;
+    }
+
+    public async Task<IEnumerable<Market>> GetAssetMarketsAsync(string assetId, int limit, int offset)
+    {
+        var res = await _client.GetAsync<DataType<IEnumerable<Market>>>(
+                _uriBuilder.Assets().WithParam(assetId).Markets().WithQueryParams(new Dictionary<string, object>()
+                {
+                    {"limit", limit },
+                    {"offset", offset }
+                }).Build())
                 .ConfigureAwait(false);
         return res.Data;
     }

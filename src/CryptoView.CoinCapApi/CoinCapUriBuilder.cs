@@ -15,10 +15,16 @@ public class CoinCapUriBuilder
         uriStringBuilder.Append(CoinCapEndpoints.BaseEndPoint);
     }
 
-
     public CoinCapUriBuilder Assets()
     {
         uriStringBuilder.Append(CoinCapEndpoints.Assets);
+
+        return this;
+    }
+
+    public CoinCapUriBuilder Markets()
+    {
+        uriStringBuilder.Append(CoinCapEndpoints.Markets);
 
         return this;
     }

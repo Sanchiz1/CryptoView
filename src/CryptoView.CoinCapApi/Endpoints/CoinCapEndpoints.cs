@@ -9,4 +9,5 @@ internal static class CoinCapEndpoints
 {
     public static readonly string BaseEndPoint = "https://api.coincap.io/v2";
     public static readonly string Assets = "/assets";
+    public static readonly string Markets = "/markets";
 }
